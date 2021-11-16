@@ -23,6 +23,7 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		int depth = 1;
 	private:
 		char mode = '1';
 };

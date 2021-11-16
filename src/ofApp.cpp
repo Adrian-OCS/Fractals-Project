@@ -21,15 +21,15 @@ void ofApp::draw()
     ofNoFill();
     if (mode == '1')
     {
-        drawMode1(ofGetWidth() / 2, ofGetHeight() / 2, 4);
+        drawMode1(ofGetWidth() / 2, ofGetHeight() / 2, depth);
     }
     else if (mode == '2')
     {
-        drawMode2(200, 10, ofGetWidth() / 2, ofGetHeight() - 50, 30);
+        drawMode2(200, depth, ofGetWidth() / 2, ofGetHeight() - 50, 30);
     }
     else if (mode == '3')
     {
-        drawMode3(ofGetWidth() / 3, 10, ofGetHeight() / 2, 10);
+        drawMode3(ofGetWidth() / 3, 10, ofGetHeight() / 2, depth);
     }
 }
 void ofApp::drawMode1(int x, int y, int n)
@@ -99,6 +99,15 @@ void ofApp::keyPressed(int key)
         break;
     case '4':
         mode = '4';
+        break;
+    case '-':
+        if(depth > 0)
+        {
+            depth--;
+        }
+        break; 
+    case '=':
+        depth++;
         break;
     }
 }

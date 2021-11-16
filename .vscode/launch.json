@@ -25,7 +25,7 @@
         },
         {
             "name": "OSX",
-            "type": "cppdbg",
+            "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/bin/${workspaceFolderBasename}.app/Contents/MacOS/${workspaceFolderBasename}",
             "args": [],
