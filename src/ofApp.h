@@ -24,6 +24,9 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		int depth = 1;
+		bool active1 = false;
+		bool active2 = false;
+		bool active3 = false;
 	private:
 		char mode = '1';
 };

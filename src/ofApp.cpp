@@ -21,16 +21,24 @@ void ofApp::draw()
     ofNoFill();
     if (mode == '1')
     {
-        drawMode1(ofGetWidth() / 2, ofGetHeight() / 2, depth);
+        if(active1){
+            drawMode1(ofGetWidth() / 2, ofGetHeight() / 2, depth);
+        }
+        if(active2){
+            drawMode2(200, depth, ofGetWidth() / 2, ofGetHeight() - 50, 30);
+        }
+        if(active3){
+            drawMode3(ofGetWidth() / 3, 10, ofGetHeight() / 2, depth);
+        }
     }
-    else if (mode == '2')
-    {
-        drawMode2(200, depth, ofGetWidth() / 2, ofGetHeight() - 50, 30);
-    }
-    else if (mode == '3')
-    {
-        drawMode3(ofGetWidth() / 3, 10, ofGetHeight() / 2, depth);
-    }
+    // else if (mode == '2')
+    // {
+    //     drawMode2(200, depth, ofGetWidth() / 2, ofGetHeight() - 50, 30);
+    // }
+    // else if (mode == '3')
+    // {
+    //     drawMode3(ofGetWidth() / 3, 10, ofGetHeight() / 2, depth);
+    // }
 }
 void ofApp::drawMode1(int x, int y, int n)
 {
@@ -89,16 +97,19 @@ void ofApp::keyPressed(int key)
     switch (key)
     {
     case '1':
-        mode = '1';
+        //mode = '1';
+        active1 = !active1; 
         break;
     case '2':
-        mode = '2';
+        // mode = '2';
+        active2 = !active2;
         break;
     case '3':
-        mode = '3';
+        //mode = '3';
+        active3 = !active3;
         break;
     case '4':
-        mode = '4';
+        //mode = '4';
         break;
     case '-':
         if(depth > 0)
