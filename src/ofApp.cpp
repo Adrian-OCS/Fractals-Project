@@ -118,7 +118,10 @@ void ofApp::keyPressed(int key)
         }
         break; 
     case '=':
-        depth++;
+        if(depth <= 7)
+        {
+            depth++; 
+        }
         break;
     }
 }
