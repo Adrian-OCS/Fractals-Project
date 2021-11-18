@@ -19,8 +19,9 @@ void ofApp::draw()
     /* The update method is called muliple times per second
     It's in charge of drawing all figures and text on screen */
     ofNoFill();
-    if (mode == '1')
-    {
+
+    // if (mode == '1')
+    // {
         if(active1){
             drawMode1(ofGetWidth() / 2, ofGetHeight() / 2, depth);
         }
@@ -30,7 +31,7 @@ void ofApp::draw()
         if(active3){
             drawMode3(ofGetWidth() / 3, 10, ofGetHeight() / 2, depth);
         }
-    }
+    // }
     // else if (mode == '2')
     // {
     //     drawMode2(200, depth, ofGetWidth() / 2, ofGetHeight() - 50, 30);
@@ -43,12 +44,20 @@ void ofApp::draw()
 void ofApp::drawMode1(int x, int y, int n)
 {
     if (n != 0)
-    {
-        ofDrawCircle(x, y, 100);
+    {     
+
+        
         drawMode1(x + 100, y, n - 1);
         drawMode1(x - 100, y, n - 1);
         drawMode1(x, y + 100, n - 1);
         drawMode1(x, y - 100, n - 1);
+
+        ofSetColor(colors[n]);
+        ofDrawCircle(x, y, 100);
+
+
+
+
     }
 }
 void ofApp::drawMode2(int length, int n, int x, int y, int d)
@@ -120,7 +129,7 @@ void ofApp::keyPressed(int key)
     case '=':
         if(depth <= 7)
         {
-            depth++; 
+            depth++;
         }
         break;
     }

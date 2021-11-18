@@ -29,4 +29,17 @@ class ofApp : public ofBaseApp{
 		bool active3 = false;
 	private:
 		char mode = '1';
+
+	vector<ofColor> colors {
+		ofColor::black,
+        ofColor::aqua,
+		ofColor::blanchedAlmond,
+		ofColor::red,
+		ofColor::yellow,
+		ofColor::green,
+		ofColor::darkSalmon,
+		ofColor::lavender,
+		ofColor::mediumSeaGreen
+    };
+
 };
