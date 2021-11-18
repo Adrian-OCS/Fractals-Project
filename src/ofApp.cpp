@@ -28,6 +28,10 @@ void ofApp::draw()
     if (active2)
     {
         drawMode2(200, depth, ofGetWidth() / 2, ofGetHeight() - 50, 30);
+        
+        drawMode2(80, depth, (ofGetWidth() / 2) - 350, ofGetHeight() - 50, 30);
+        
+        drawMode2(80, depth, (ofGetWidth() / 2) + 350, ofGetHeight() - 50, 30);
     }
     if (active3)
     {
