@@ -12,6 +12,7 @@ class ofApp : public ofBaseApp{
 		void drawMode1(int x, int y, int n);
 		void drawMode2(int length, int n, int x, int y, int d);
 		void drawMode3(float x, float y, float size, int n);
+		void drawMode4(float x, float y, int n, int d, int h);
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -28,6 +29,7 @@ class ofApp : public ofBaseApp{
 		bool active1 = false;
 		bool active2 = false;
 		bool active3 = false;
+		bool active4 = false;
 	private:
 		char mode = '1';
 

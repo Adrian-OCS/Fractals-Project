@@ -37,6 +37,11 @@ void ofApp::draw()
     {
         drawMode3(ofGetWidth() / 3, 10, ofGetHeight() / 2, depth);
     }
+    if (active4)
+    {
+        drawMode4(ofGetWidth()/8, ofGetHeight()*0.8, depth, 800, 100);
+    }
+
 }
 void ofApp::drawMode1(int x, int y, int n)
 {
@@ -97,6 +102,26 @@ void ofApp::drawMode3(float x, float y, float size, int n)
     drawMode3((c.x + a.x) / 2, (c.y + a.y) / 2, size / 2, n - 1);    
 }
 
+void ofApp::drawMode4(float x, float y, int n, int d, int h){
+
+    if (n!=0){
+
+        ofSetColor(colors[depth - n + 1]);
+
+        ofDrawLine(x, y, x+d, y);
+        ofDrawLine(x+d, y, x+d, y-h); 
+        ofDrawLine(x+d, y-h, x, y-h);
+        ofDrawLine(x, y-h, x, y-(h*2));
+
+        drawMode4(x, y-(h*2), n-1, d/2, h/2);
+
+    }
+
+}
+
+
+
+
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
@@ -117,6 +142,7 @@ void ofApp::keyPressed(int key)
         break;
     case '4':
         //mode = '4';
+        active4 = !active4;
         break;
     case '-':
         if (depth > 0)
