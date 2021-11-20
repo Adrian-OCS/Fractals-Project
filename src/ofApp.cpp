@@ -3,6 +3,12 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
+    rectangle = new Mode1();
+    tree = new Mode2();
+    sierpinski = new Mode3();
+    fractals.push_back(rectangle);
+    fractals.push_back(tree);
+    fractals.push_back(sierpinski);
 }
 
 //--------------------------------------------------------------
@@ -19,109 +25,39 @@ void ofApp::draw()
     /* The update method is called muliple times per second
     It's in charge of drawing all figures and text on screen */
     ofNoFill();
-    //ofEnableDepthTest(); 
-    if (active1)
+    for (FractalMode* f : fractals)
     {
-        drawMode1(ofGetWidth() / 2, ofGetHeight() / 2, depth);
-
-    }
-    if (active2)
-    {
-        drawMode2(200, depth, ofGetWidth() / 2, ofGetHeight() - 50, 30);
-        
-        drawMode2(80, depth, (ofGetWidth() / 2) - 350, ofGetHeight() - 50, 30);
-        
-        drawMode2(80, depth, (ofGetWidth() / 2) + 350, ofGetHeight() - 50, 30);
-    }
-    if (active3)
-    {
-        drawMode3(ofGetWidth() / 3, 10, ofGetHeight() / 2, depth);
-    }
-    if (active4)
-    {
-        drawMode4(ofGetWidth()/8, ofGetHeight()*0.8, depth, 800, 100);
-    }
-
-}
-void ofApp::drawMode1(int x, int y, int n)
-{
-    if (n != 0)
-    {
-        ofSetColor(colors[depth - n + 1]);
-        ofDrawRectangle(x-50, y-20, 100, 100);
-
-
-        drawMode1(x + 100, y, n - 1);
-        drawMode1(x - 100, y, n - 1);
-        drawMode1(x, y + 100, n - 1);
-        drawMode1(x, y - 100, n - 1);
-
-    }
-}
-void ofApp::drawMode2(int length, int n, int x, int y, int d)
-{
-    if (n != 0)
-    {
-        int middleX = x;
-        int middleY = y - length;
-        int leftBranchX = x - length * cos(PI / 180 * d);
-        int leftBranchY = middleY - length * sin(PI / 180 * d);
-        int rightBranchX = x + length * cos(PI / 180 * d);
-        int rightBranchY = middleY - length * sin(PI / 180 * d);
-
-        ofSetColor(colors[depth - n + 1]);
-
-        ofDrawLine(x, y, x, y - length);
-        ofDrawLine(x, y - length, x, y - length * 2);
-        ofDrawLine(x, y - length, rightBranchX, rightBranchY);
-        ofDrawLine(x, y - length, leftBranchX, leftBranchY);
-
-        drawMode2(length / 2, n - 1, rightBranchX, rightBranchY, 30);
-        drawMode2(length / 2, n - 1, middleX, middleY, 30);
-        drawMode2(length / 2, n - 1, leftBranchX, leftBranchY, 30);
+        if (f->getActivate())
+        {
+            f->draw(); 
+        }
     }
 }
 
-void ofApp::drawMode3(float x, float y, float size, int n)
-{
-    if (n == 0)
-    {
-        return;
-    }
-
-    ofPoint a(x, y);
-    ofPoint b(x + size, y);
-    ofPoint c(x + size / 2, y + ((sqrt(3) * size) / 2));
-
-    ofSetColor(colors[depth - n + 1]);
-
-    ofDrawTriangle(a, b, c);
-
-    drawMode3(x, y, size / 2, n - 1);
-    drawMode3((a.x + b.x) / 2, (a.y + b.y) / 2, size / 2, n - 1);
-    drawMode3((c.x + a.x) / 2, (c.y + a.y) / 2, size / 2, n - 1);    
-}
-
-void ofApp::drawMode4(float x, float y, int n, int d, int h){
-
-    if (n!=0){
-
-        ofSetColor(colors[depth - n + 1]);
-
-        ofDrawLine(x, y, x+d, y);
-        ofDrawLine(x+d, y, x+d, y-h); 
-        ofDrawLine(x+d, y-h, x, y-h);
-        ofDrawLine(x, y-h, x, y-(h*2));
-
-        drawMode4(x, y-(h*2), n-1, d/2, h/2);
-
-    }
-
-}
+    // if (active4)
+    // {
+    //     drawMode4(ofGetWidth()/8, ofGetHeight()*0.8, depth, 800, 100);
+    // }
 
 
 
 
+// void ofApp::drawMode4(float x, float y, int n, int d, int h){
+
+//     if (n!=0){
+
+//         ofSetColor(colors[depth - n + 1]);
+
+//         ofDrawLine(x, y, x+d, y);
+//         ofDrawLine(x+d, y, x+d, y-h); 
+//         ofDrawLine(x+d, y-h, x, y-h);
+//         ofDrawLine(x, y-h, x, y-(h*2));
+
+//         drawMode4(x, y-(h*2), n-1, d/2, h/2);
+
+//     }
+
+// }
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
@@ -129,32 +65,23 @@ void ofApp::keyPressed(int key)
     switch (key)
     {
     case '1':
-        //mode = '1';
-        active1 = !active1;
+        fractals[0]->setActivate(!fractals[0]->getActivate());
         break;
     case '2':
-        // mode = '2';
-        active2 = !active2;
+        fractals[1]->setActivate(!fractals[1]->getActivate());
         break;
     case '3':
-        //mode = '3';
-        active3 = !active3;
+        fractals[2]->setActivate(!fractals[2]->getActivate());
         break;
     case '4':
         //mode = '4';
-        active4 = !active4;
+        //active4 = !active4;
         break;
     case '-':
-        if (depth > 0)
-        {
-            depth--;
-        }
+        for(FractalMode* f : fractals) if(f->getDepth() > 0) f->setDepth(f->getDepth() - 1 );
         break;
     case '=':
-        if (depth <= 7)
-        {
-            depth++;
-        }
+        for(FractalMode* f : fractals) if(f->getDepth() <= 7) f->setDepth(f->getDepth() + 1 );
         break;
     }
 }
