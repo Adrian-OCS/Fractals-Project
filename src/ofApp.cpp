@@ -7,11 +7,13 @@ void ofApp::setup()
     tree = new Mode2();
     sierpinski = new Mode3();
     mode4 = new Mode4();
-    animation = new Animation({rectangle, tree, sierpinski,mode4}, 20);
+    bonusFractal = new BonusFractal(); 
+    animation = new Animation({rectangle, tree, sierpinski,mode4,bonusFractal}, 20);
     fractals.push_back(rectangle);
     fractals.push_back(tree);
     fractals.push_back(sierpinski);
     fractals.push_back(mode4); 
+    fractals.push_back(bonusFractal);
 }
 
 //--------------------------------------------------------------
@@ -38,28 +40,6 @@ void ofApp::draw()
     }
     animation->draw();
 }
-
-// if (active4)
-// {
-//     drawMode4(ofGetWidth()/8, ofGetHeight()*0.8, depth, 800, 100);
-// }
-
-// void ofApp::drawMode4(float x, float y, int n, int d, int h){
-
-//     if (n!=0){
-
-//         ofSetColor(colors[depth - n + 1]);
-
-//         ofDrawLine(x, y, x+d, y);
-//         ofDrawLine(x+d, y, x+d, y-h);
-//         ofDrawLine(x+d, y-h, x, y-h);
-//         ofDrawLine(x, y-h, x, y-(h*2));
-
-//         drawMode4(x, y-(h*2), n-1, d/2, h/2);
-
-//     }
-
-// }
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
@@ -77,6 +57,9 @@ void ofApp::keyPressed(int key)
         break;
     case '4':
         fractals[3]->setActivate(!fractals[3]->getActivate());
+        break;
+    case '5':
+        fractals[4]->setActivate(!fractals[4]->getActivate());
         break;
     case '-':
         for (FractalMode *x : fractals)

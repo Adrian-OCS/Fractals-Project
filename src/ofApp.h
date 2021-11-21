@@ -3,11 +3,12 @@
 
 #include "ofMain.h"
 #include "FractalMode.h"
-#include "Tree.h"
 #include "Rectangle.h"
+#include "Tree.h"
 #include "Sierpinski.h"
-#include "Animation.h"
 #include "Mode4Fractor.h"
+#include "BonusFractal.h"
+#include "Animation.h"
 
 class ofApp : public ofBaseApp
 {
@@ -32,6 +33,7 @@ private:
 	Mode2 *tree;
 	Mode3 *sierpinski;
 	Mode4 *mode4;
+	BonusFractal *bonusFractal;
 	std::vector<FractalMode*> fractals;
 	Animation* animation; 
 };
