@@ -7,6 +7,7 @@
 #include "Rectangle.h"
 #include "Sierpinski.h"
 #include "Animation.h"
+#include "Mode4Fractor.h"
 
 class ofApp : public ofBaseApp
 {
@@ -30,6 +31,7 @@ private:
 	Mode1 *rectangle;
 	Mode2 *tree;
 	Mode3 *sierpinski;
+	Mode4 *mode4;
 	std::vector<FractalMode*> fractals;
 	Animation* animation; 
 };

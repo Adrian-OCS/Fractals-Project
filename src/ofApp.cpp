@@ -6,10 +6,12 @@ void ofApp::setup()
     rectangle = new Mode1();
     tree = new Mode2();
     sierpinski = new Mode3();
-    animation = new Animation({rectangle, tree, sierpinski}, 20);
+    mode4 = new Mode4();
+    animation = new Animation({rectangle, tree, sierpinski,mode4}, 20);
     fractals.push_back(rectangle);
     fractals.push_back(tree);
     fractals.push_back(sierpinski);
+    fractals.push_back(mode4); 
 }
 
 //--------------------------------------------------------------
@@ -74,8 +76,7 @@ void ofApp::keyPressed(int key)
         fractals[2]->setActivate(!fractals[2]->getActivate());
         break;
     case '4':
-        //mode = '4';
-        //active4 = !active4;
+        fractals[3]->setActivate(!fractals[3]->getActivate());
         break;
     case '-':
         for (FractalMode *x : fractals)
