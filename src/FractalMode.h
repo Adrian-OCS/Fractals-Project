@@ -5,10 +5,9 @@
 class FractalMode
 {
 public:
-    //FractalMode();
     virtual void draw() = 0;
     bool getActivate() { return activate; };
-    void setActivate(bool b) { activate = b; };
+    void setActivate(bool x) { activate = x; };
     int getDepth() { return n; };
     void setDepth(int n) { this->n = n; };
 protected:

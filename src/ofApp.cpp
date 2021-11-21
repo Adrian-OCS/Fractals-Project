@@ -6,6 +6,7 @@ void ofApp::setup()
     rectangle = new Mode1();
     tree = new Mode2();
     sierpinski = new Mode3();
+    animation = new Animation({rectangle, tree, sierpinski}, 20);
     fractals.push_back(rectangle);
     fractals.push_back(tree);
     fractals.push_back(sierpinski);
@@ -17,6 +18,7 @@ void ofApp::update()
     /* The update method is called muliple times per second
     It's in charge of updating variables and the logic of our app */
     ofSetBackgroundColor(0, 0, 0);
+    animation->tick();
 }
 
 //--------------------------------------------------------------
@@ -25,22 +27,20 @@ void ofApp::draw()
     /* The update method is called muliple times per second
     It's in charge of drawing all figures and text on screen */
     ofNoFill();
-    for (FractalMode* f : fractals)
+    for (FractalMode *x : fractals)
     {
-        if (f->getActivate())
+        if (x->getActivate())
         {
-            f->draw(); 
+            x->draw();
         }
     }
+    animation->draw();
 }
 
-    // if (active4)
-    // {
-    //     drawMode4(ofGetWidth()/8, ofGetHeight()*0.8, depth, 800, 100);
-    // }
-
-
-
+// if (active4)
+// {
+//     drawMode4(ofGetWidth()/8, ofGetHeight()*0.8, depth, 800, 100);
+// }
 
 // void ofApp::drawMode4(float x, float y, int n, int d, int h){
 
@@ -49,7 +49,7 @@ void ofApp::draw()
 //         ofSetColor(colors[depth - n + 1]);
 
 //         ofDrawLine(x, y, x+d, y);
-//         ofDrawLine(x+d, y, x+d, y-h); 
+//         ofDrawLine(x+d, y, x+d, y-h);
 //         ofDrawLine(x+d, y-h, x, y-h);
 //         ofDrawLine(x, y-h, x, y-(h*2));
 
@@ -78,10 +78,43 @@ void ofApp::keyPressed(int key)
         //active4 = !active4;
         break;
     case '-':
-        for(FractalMode* f : fractals) if(f->getDepth() > 0) f->setDepth(f->getDepth() - 1 );
+        for (FractalMode *x : fractals)
+        {
+            if (x->getDepth() > 0)
+            {
+
+                x->setDepth(x->getDepth() - 1);
+            }
+        }
         break;
     case '=':
-        for(FractalMode* f : fractals) if(f->getDepth() <= 7) f->setDepth(f->getDepth() + 1 );
+        for (FractalMode *x : fractals)
+        {
+            if (x->getDepth() <= 7)
+            {
+                x->setDepth(x->getDepth() + 1);
+            }
+        }
+        break;
+    case 'c':
+        animation->setActivate(false);
+        for (FractalMode *x : animation->getFractals())
+        {
+            x->setDepth(5);
+        }
+        break;
+
+        // FALTA HACER QUE SOLO HAGA LA ANIMACION A EL FRACTAL QUE ESTE ACTIVADO
+
+    case ' ':
+        if (animation->getActivate() == false)
+        {
+            animation->setActivate(true);
+            for (FractalMode *x : animation->getFractals())
+            {
+                x->setDepth(0);
+            }
+        }
         break;
     }
 }
