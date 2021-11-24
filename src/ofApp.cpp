@@ -93,10 +93,11 @@ void ofApp::keyPressed(int key)
     case ' ':
         if (animation->getActivate() == false)
         {
-            animation->setActivate(true);
             for (FractalMode *x : animation->getFractals())
             {
+                animation->setActivate(true);
                 x->setDepth(0);
+                
             }
         }
         break;

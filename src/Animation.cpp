@@ -45,7 +45,9 @@ void Animation::draw()
     {
         for (FractalMode *x : fractals)
         {
-            x->draw();
+                if (x->getActivate()){
+                x->draw();
+            }
         }
     }
 }
